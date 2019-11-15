@@ -58,13 +58,14 @@ class App extends React.Component
   render()
   {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer ',
 
-    }
+    };
     let persons = null;
     if (this.state.showPersons)
     {
@@ -84,6 +85,7 @@ class App extends React.Component
 
         </div>
       );
+      style.backgroundColor = 'salmon';
     }
 
     let classes = [];
@@ -105,6 +107,7 @@ class App extends React.Component
         <button
           style={style}
           onClick={this.togglePersonHandler}
+
         > Toggle Persons</button>
         {persons}
 
