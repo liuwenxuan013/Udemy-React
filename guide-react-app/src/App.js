@@ -64,6 +64,10 @@ class App extends React.Component
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer ',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
 
     };
     let persons = null;
@@ -86,6 +90,10 @@ class App extends React.Component
         </div>
       );
       style.backgroundColor = 'salmon';
+      style[':hover'] = {//using [] =
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
 
     let classes = [];
@@ -119,4 +127,4 @@ class App extends React.Component
 
 }
 
-export default App;
+export default Radium(App);
