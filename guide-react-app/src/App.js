@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Person from './Person/Person';
 class App extends React.Component
 {
   state = {
     persons: [
-      { name: 'Laura', age: 28 },
-      { name: 'Tim', age: 18 },
-      { name: 'Alisa', age: 20 },
+      { id: '01', name: 'Laura', age: 28 },
+      { id: '02', name: 'Tim', age: 18 },
+      { id: '03', name: 'Alisa', age: 20 },
     ],
     showPersons: false,
 
@@ -27,7 +27,8 @@ class App extends React.Component
   }
   deletePersonHandler = (personIndex) =>
   {
-    const persons = this.state.persons;
+    //const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
 
@@ -57,7 +58,7 @@ class App extends React.Component
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer ',
 
     }
     let persons = null;
@@ -72,6 +73,7 @@ class App extends React.Component
               name={person.name}
               age={person.age}
               click={() => { this.deletePersonHandler(index) }}
+              key={person.id}
             />
           })}
 
@@ -82,7 +84,7 @@ class App extends React.Component
     return (
       <div className="App">
         <h1>hi, laura</h1>
-        <p>Anothor heading</p>
+        <p>Another heading</p>
 
         <button
           style={style}
