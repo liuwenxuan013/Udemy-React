@@ -39,15 +39,18 @@ class App extends React.Component
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
   }
-  changeHandler = (event) =>
+  changeHandler = (event, id) =>
   {
-    this.setState({
-      persons: [
-        { name: event.target.value, age: 28 },
-        { name: 'Tim', age: 18 },
-        { name: 'Alisa', age: 20 },
-      ]
-    })
+    const personIndex = this.state.persons.findIndex(p =>
+    {
+      return p.id === id;
+    });
+    const person = { ...this.state.persons[personIndex] };
+    //const person = Object.assign({}, this.state.persons[personIndex]);
+    person.name = event.target.value;
+    const newPersons = [...this.state.persons];
+    newPersons[personIndex] = person;
+    this.setState({ persons: newPersons });
 
   }
 
@@ -74,6 +77,7 @@ class App extends React.Component
               age={person.age}
               click={() => { this.deletePersonHandler(index) }}
               key={person.id}
+              changed={(event) => this.changeHandler(event, person.id)}
             />
           })}
 
