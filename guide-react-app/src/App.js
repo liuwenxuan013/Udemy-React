@@ -52,6 +52,33 @@ class App extends React.Component
       cursor: 'pointer'
 
     }
+    let persons = null;
+    if (this.state.showPersons)
+    {
+      persons = (
+
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            click={() => { return this.nameSwitchHandler('hello hello...') }}//way:1
+
+          />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.nameSwitchHandler.bind(this, 'superman')}//way:2 bind this 
+            changed={this.changeHandler}
+
+          > my hobbies is:painting </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age} />
+
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>hi, laura</h1>
@@ -61,27 +88,7 @@ class App extends React.Component
           style={style}
           onClick={this.togglePersonHandler}
         > Toggle Persons</button>
-        {this.state.showPersons ?
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-              click={() => { return this.nameSwitchHandler('hello hello...') }}//way:1
-
-            />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.nameSwitchHandler.bind(this, 'superman')}//way:2 bind this 
-              changed={this.changeHandler}
-
-            > my hobbies is:painting </Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age} />
-
-          </div> : null
-        }
+        {persons}
 
       </div>
 
