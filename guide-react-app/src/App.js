@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Radium from 'radium';
 class App extends React.Component
 {
   state = {
@@ -85,10 +86,21 @@ class App extends React.Component
       );
     }
 
+    let classes = [];
+    if (this.state.persons.length <= 2)
+    {
+      classes.push('red'); //classes = ['red']
+    }
+    if (this.state.persons.length <= 1)
+    {
+      classes.push('bold');//classes=['red','bold']
+    }
+
+
     return (
       <div className="App">
-        <h1>hi, laura</h1>
-        <p>Another heading</p>
+        <h1>Hi, I'm Laura</h1>
+        <p className={classes.join(' ')}> This is really work!!!</p>
 
         <button
           style={style}
