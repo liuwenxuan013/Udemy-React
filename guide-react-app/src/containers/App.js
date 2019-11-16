@@ -29,6 +29,23 @@ class App extends React.Component
   {
     console.log('[App.js] componentDidMount');
   }
+
+  shouldComponentUpdate(nextProps, nextState)
+  {
+    console.log('[App.js] shouldComponentUpdate', nextProps);
+    return nextState;
+  }
+
+
+  componentDidUpdate()
+  {
+    console.log('[App.js] componentDidUpdate');
+  }
+  getSnapshotBeforeUpdate(prevProps, prevState)
+  {
+    console.log('[App.js] getSnapshotBeforeUpdate');
+    return prevProps;
+  }
   nameSwitchHandler = (newName) =>
   {
     this.setState({
