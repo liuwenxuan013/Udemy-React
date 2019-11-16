@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import Persons from '../components/Persons/persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import classes from './App.css';
@@ -58,21 +57,17 @@ class App extends React.Component
   render()
   {
     let persons = null;
-
     if (this.state.showPersons)
-
       persons =
         <Persons
           persons={this.state.persons}
           clickDelete={this.deletePersonHandler}
           changeName={this.changeNameHandler}
-
         />
-
-
     return (
       <div className={classes.App}>
         <Cockpit
+          title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clickToggle={this.togglePersonHandler}
