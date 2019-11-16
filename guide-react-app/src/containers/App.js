@@ -5,6 +5,11 @@ import classes from './App.css';
 
 class App extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+    console.log('[App.js] constructor...');
+  }
   state = {
     persons: [
       { id: '01', name: 'Laura', age: 28 },
@@ -13,6 +18,16 @@ class App extends React.Component
     ],
     showPersons: false,
 
+  }
+
+  static getDerivedStateFormProps(props, state)
+  {
+    console.log('[App.js] getDerivedStateFormProps]', props);
+    return state;
+  }
+  componentDidMount()
+  {
+    console.log('[App.js] componentDidMount');
   }
   nameSwitchHandler = (newName) =>
   {
@@ -54,8 +69,10 @@ class App extends React.Component
     this.setState({ persons: newPersons });
 
   }
+
   render()
   {
+    console.log('[App.js] rendering...');
     let persons = null;
     if (this.state.showPersons)
       persons =
@@ -64,8 +81,11 @@ class App extends React.Component
           clickDelete={this.deletePersonHandler}
           changeName={this.changeNameHandler}
         />
+
     return (
+
       <div className={classes.App}>
+
         <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}

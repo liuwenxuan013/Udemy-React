@@ -3,8 +3,12 @@ import Person from './Person/Person';
 
 
 const persons = (props) =>
-    props.persons.map((person, index) =>
+{
+    console.log('[Persons.js] rendering...');
+
+    return props.persons.map((person, index) =>
     {
+
         return <Person
             click={() => props.clickDelete(index)}
             name={person.name}
@@ -13,5 +17,6 @@ const persons = (props) =>
             changed={(event) => props.changeName(event, person.id)}
         />
     });
+}
 
 export default persons;
