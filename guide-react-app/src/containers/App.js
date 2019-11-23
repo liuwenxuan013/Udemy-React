@@ -17,6 +17,7 @@ class App extends React.Component
       { id: '03', name: 'Alisa', age: 20 },
     ],
     showPersons: false,
+    showCockpit: true,
 
   }
 
@@ -25,6 +26,10 @@ class App extends React.Component
     console.log('[App.js] getDerivedStateFormProps]', props);
     return state;
   }
+  // componentWillMount()
+  // {
+  //   console.log('[App.js] componentWillMount');
+  // }
   componentDidMount()
   {
     console.log('[App.js] componentDidMount');
@@ -33,7 +38,7 @@ class App extends React.Component
   shouldComponentUpdate(nextProps, nextState)
   {
     console.log('[App.js] shouldComponentUpdate', nextProps);
-    return nextState;
+    return true;
   }
 
 
@@ -46,6 +51,7 @@ class App extends React.Component
     console.log('[App.js] getSnapshotBeforeUpdate');
     return prevProps;
   }
+
   nameSwitchHandler = (newName) =>
   {
     this.setState({
@@ -102,13 +108,19 @@ class App extends React.Component
     return (
 
       <div className={classes.App}>
-
-        <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clickToggle={this.togglePersonHandler}
-        />
+        <button onClick={() =>
+        {
+          this.setState({ showCockpit: false });
+        }
+        }>Remove Cockpit</button>
+        {this.state.showCockpit ?
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clickToggle={this.togglePersonHandler}
+            showCockpit
+          /> : null}
         {persons}
 
       </div >

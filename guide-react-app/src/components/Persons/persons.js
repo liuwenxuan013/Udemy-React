@@ -2,21 +2,50 @@ import React from 'react';
 import Person from './Person/Person';
 
 
-const persons = (props) =>
+class Persons extends React.Component 
 {
-    console.log('[Persons.js] rendering...');
+    static getDerivedStateFormProps(props, state)
+    {
+        console.log('[Persons.js] getDerivedStateFormProps');
+        return state;
+    }
 
-    return props.persons.map((person, index) =>
+    shouldComponentUpdate(nextProps, nextState)
+    {
+        console.log('[Persons.js] shouldComponentUpdate');
+        return true;
+    }
+    getSnapshotBeforeUpdate(preProps, preState)
+    {
+        console.log('[Persons.js] getSnapshotBeforeUpdate');
+        return { message: 'Snapshot!' }
+    }
+    componentDidUpdate(preProps, preState, snapshot)
     {
 
-        return <Person
-            click={() => props.clickDelete(index)}
-            name={person.name}
-            key={person.id}
-            age={person.age}
-            changed={(event) => props.changeName(event, person.id)}
-        />
-    });
+        console.log('[Persons.js] componentDidUpdate');
+        console.log(snapshot);
+    }
+    componentWillUnmount()
+    {
+        console.log('[Persons.js] componentWillUnmount');
+    }
+    render()
+    {
+        console.log('[Persons.js] rendering...');
+
+        return this.props.persons.map((person, index) =>
+        {
+
+            return <Person
+                click={() => this.props.clickDelete(index)}
+                name={person.name}
+                key={person.id}
+                age={person.age}
+                changed={(event) => this.props.changeName(event, person.id)}
+            />
+        });
+    }
 }
 
-export default persons;
+export default Persons;
