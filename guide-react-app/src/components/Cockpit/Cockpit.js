@@ -1,24 +1,14 @@
-import React, { useEffect } from 'react';
-import classes from './Cockpit.module.css';
+import React from 'react';
 
-const Cockpit = (props) =>
+import classes from './Cockpit.css';
+
+const cockpit = (props) =>
 {
-    // useEffect(() =>
-    // {
-    //     console.log('[Cockpit.js] useEffect');
-    //     setTimeout(() => { alert('save data to cloud!!') }, 1000);
-    //     return () =>
-    //     {
-    //         console.log('[Cockpit.js] cleaning work in useEffect');
-    //     }
-    // }, [props.persons]);
-
-
     let assignedClass = [];
     let btnClass = '';
     if (props.showPersons)
     {
-        btnClass = classes.Red;// red button for person show
+        btnClass = classes.Red;
     }
 
     if (props.persons.length <= 2)
@@ -41,7 +31,10 @@ const Cockpit = (props) =>
                 onClick={props.clickToggle}
 
             > Toggle Persons</button>
+
+
+
         </div >
     );
 }
-export default Cockpit;
+export default cockpit;
