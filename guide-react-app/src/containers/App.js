@@ -1,7 +1,7 @@
 import React from 'react';
 import Persons from '../components/Persons/persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import classes from './App.css';
+import classes from './App.module.css';
 
 class App extends React.Component
 {
@@ -17,14 +17,19 @@ class App extends React.Component
       { id: '03', name: 'Alisa', age: 20 },
     ],
     showPersons: false,
+    showCockpit: true,
 
   }
 
   static getDerivedStateFormProps(props, state)
   {
-    console.log('[App.js] getDerivedStateFormProps]', props);
+    console.log('[App.js] getDerivedStateFormProps]', [props, state]);
     return state;
   }
+  // componentWillMount()
+  // {
+  //   console.log('[App.js] componentWillMount');
+  // }
   componentDidMount()
   {
     console.log('[App.js] componentDidMount');
@@ -32,33 +37,27 @@ class App extends React.Component
 
   shouldComponentUpdate(nextProps, nextState)
   {
-    console.log('[App.js] shouldComponentUpdate', nextProps);
-    return nextState;
-  }
-
-
-  componentDidUpdate()
-  {
-    console.log('[App.js] componentDidUpdate');
+    console.log('[App.js] shouldComponentUpdate', [nextProps, nextState]);
+    return true;
   }
   getSnapshotBeforeUpdate(prevProps, prevState)
   {
-    console.log('[App.js] getSnapshotBeforeUpdate');
-    return prevProps;
+    console.log('[App.js] getSnapshotBeforeUpdate', [prevProps, prevState]);
+    return 'the prevProps is: ' + prevProps + '& prevState is: ' + prevState;
   }
-  nameSwitchHandler = (newName) =>
+
+  componentDidUpdate(prevProps, prevState, snapshot)
   {
-    this.setState({
-      persons: [
-        { name: newName, age: 28 },
-        { name: 'Tim', age: 18 },
-        { name: 'Alisa', age: 20 },
-      ],
-    }
-
-
-    );
+    console.log('[App.js] componentDidUpdate', [prevProps, prevState, snapshot]);
+    return snapshot;
   }
+
+  componentWillUnmount()
+  {
+    console.log('[App.js] componentWillUnmount');
+  }
+
+
   deletePersonHandler = (personIndex) =>
   {
     //const persons = this.state.persons.slice();
@@ -101,16 +100,30 @@ class App extends React.Component
 
     return (
 
+
       <div className={classes.App}>
 
-        <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clickToggle={this.togglePersonHandler}
-        />
-        {persons}
+        <button
+          onClick={() =>
+          {
+            this.setState({ showCockpit: false });
+          }}>
+          Remove Cockpit
+            </button>
+        <button
+          onClick={this.addClickHandler}
+        > +
+        </button>
 
+        {this.state.showCockpit ?
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            persons={this.state.persons}
+            clickToggle={this.togglePersonHandler}
+            showCockpit={this.state.showCockpit}
+          /> : null}
+        {persons}
       </div >
 
     );
