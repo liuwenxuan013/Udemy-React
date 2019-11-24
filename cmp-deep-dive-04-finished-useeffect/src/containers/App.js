@@ -76,17 +76,8 @@ class App extends Component {
 
   render() {
     console.log('[App.js] render');
-    let persons = null;
 
-    if (this.state.showPersons) {
-      persons = (
-        <Persons
-          persons={this.state.persons}
-          clicked={this.deletePersonHandler}
-          changed={this.nameChangedHandler}
-        />
-      );
-    }
+
 
     return (
       <div className={classes.App}>
@@ -105,7 +96,11 @@ class App extends Component {
             clicked={this.togglePersonsHandler}
           />
         ) : null}
-        {persons}
+        {this.state.showPersons? <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}
+        />:null}
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
