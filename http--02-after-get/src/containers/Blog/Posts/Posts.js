@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import axios from '../../../axios';
 import Post from '../../../components/Post/Post';
 import './Posts.css';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 class Posts extends React.Component
 {
     state = {
@@ -12,6 +14,7 @@ class Posts extends React.Component
     }
     componentDidMount()
     {
+        console.log(this.props);
         axios.get('/posts/')
             .then(response =>
             {
@@ -44,11 +47,14 @@ class Posts extends React.Component
         {
             posts = this.state.posts.map(post =>
             {
-                return <Post
-                    key={post.id}
-                    title={post.title}
-                    author={post.author}
-                    clicked={() => this.postSelectedHandler(post.id)} />;
+                return <Link to={'/' + post.id} key={post.id}>
+                    <Post
+
+                        title={post.title}
+                        author={post.author}
+                        {...this.props.match}
+                        clicked={() => this.postSelectedHandler(post.id)} />
+                </Link>;
             });
         }
 
@@ -60,4 +66,4 @@ class Posts extends React.Component
     }
 }
 
-export default Posts;
+export default withRouter(Posts);//add the containing information for the nearest loaded route
