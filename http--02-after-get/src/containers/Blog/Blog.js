@@ -22,13 +22,13 @@ class Blog extends Component
                         <ul>
                             <li><NavLink
                                 to="/"
-                                // exact
+                                //exact
                                 activeClassName="my-active"
                                 activeStyle={{
-                                    color: 'fa923f',
+                                    color: '#fa923f',
                                     textDecoration: 'underline'
                                 }}
-                            >Home</NavLink></li>
+                            >Posts</NavLink></li>
                             <li><NavLink to={{
                                 pathname: './new-post',
                                 // relativePath:pathname: this.props.match.url+'./new-post',
